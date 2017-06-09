@@ -50,6 +50,8 @@ def fix_turnstile_data(filenames):
     
     Sample input file: turnstile_110528.txt
     Sample updated file: solution_turnstile_110528.txt
+    
+    THEY KEY TO THIS IS REALISING THE DELIMETER PUTS THE ITEMS AS AN "ELEMENT" not a STRING
     '''
     for name in filenames:
         
@@ -62,15 +64,15 @@ def fix_turnstile_data(filenames):
         writer = csv.writer(f_out, delimiter = ',')
         for row in reader:
             #Looking at the data, first 4 characters are the ID of the Tram
-            tram_id = row[0:3]
-            row = row[3:]
+            tram_id = row[:3]
             #Store that tram ID for the length of entire row
-            while len(row) > 0:
-                #Writing process
-                new_row = tram_id + row[:5]
-                #Take first tram ID, delimit, take next tram line
-                row = row[5:]
-                writer.writerow(new_row)
+            for i in range(3, len(row), 5):
+                # Rest of row, 5 elements at a time
+                endrow = row[i:i+5]
+                # New row made from first 3 and each set of next 5 
+                newrow = tram_id + endrow
+                # Write each newly combined row to the writer file
+                writer.writerow(newrow)
         f_out.close()
         file.close()
         
