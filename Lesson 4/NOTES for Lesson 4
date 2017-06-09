@@ -1,0 +1,15 @@
+Quiz 1:
+SELECT COUNT(column_name)
+FROM table_name
+WHERE condition;
+
+
+Quiz 2:
+SELECT MAX(column_name)
+FROM table_name
+WHERE condition;
+
+SELECT COUNT(CustomerID), Country
+FROM Customers
+GROUP BY Country;
+The GROUP BY statement is often used with aggregate functions (COUNT, MAX, MIN, SUM, AVG) to group the result-set by one or more columns.
